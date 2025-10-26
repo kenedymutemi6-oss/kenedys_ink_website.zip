@@ -1,0 +1,144 @@
+import { useState } from "react";
+import { motion } from "framer-motion";
+
+export default function KenedysInk() {
+  const [activePage, setActivePage] = useState("home");
+
+  const pages = {
+    home: (
+      <div className="space-y-6 text-center">
+        <motion.h1
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          className="text-4xl font-bold"
+        >
+          Kenedy’s Ink
+        </motion.h1>
+        <p className="italic text-gray-600">Where words find their rhythm</p>
+        <div className="max-w-2xl mx-auto bg-white/80 backdrop-blur-md shadow-md p-6 rounded-xl">
+          <div className="w-32 h-32 mx-auto rounded-full bg-gray-200 flex items-center justify-center text-gray-400">
+            Profile Photo
+          </div>
+          <p className="mt-4 text-gray-800">
+            Kenedy Mutemi is a passionate writer and poet from Kenya, blending
+            creativity with knowledge as he studies Civil Engineering Education
+            at Dedan Kimathi University of Technology. His works — poems, plays,
+            and novels — reflect real life, emotion, and growth. Beyond art,
+            Kenedy finds joy in teaching, inspiring others, and sharing the
+            beauty of words that build both minds and hearts.
+          </p>
+        </div>
+      </div>
+    ),
+    poems: (
+      <div className="space-y-4 max-w-3xl mx-auto text-center">
+        <h2 className="text-3xl font-semibold">Poems</h2>
+        <p className="text-gray-600">
+          Here is where Kenedy’s poetry finds its home — reflections of life,
+          emotion, and rhythm.
+        </p>
+        <p className="text-gray-800 italic">
+          Readers will soon be able to enjoy the first collection of poems here.
+        </p>
+      </div>
+    ),
+    plays: (
+      <div className="space-y-4 max-w-3xl mx-auto text-center">
+        <h2 className="text-3xl font-semibold">Plays</h2>
+        <p className="text-gray-600">
+          Dramatic creations that explore the strength, struggle, and soul of
+          humanity.
+        </p>
+        <p className="text-gray-800 italic">
+          Kenedy’s plays will soon grace this stage.
+        </p>
+      </div>
+    ),
+    novels: (
+      <div className="space-y-4 max-w-3xl mx-auto text-center">
+        <h2 className="text-3xl font-semibold">Novels</h2>
+        <p className="text-gray-600">
+          Extended stories that carry deep emotions, vivid imagery, and
+          meaningful messages.
+        </p>
+        <p className="text-gray-800 italic">
+          Stay tuned for Kenedy’s upcoming novels and story excerpts.
+        </p>
+      </div>
+    ),
+    about: (
+      <div className="space-y-4 max-w-2xl mx-auto text-center">
+        <h2 className="text-3xl font-semibold">About Kenedy</h2>
+        <p>
+          Kenedy Mutemi is a 23-year-old writer, poet, and aspiring educator
+          from Kenya. Currently pursuing a Bachelor of Education in Technology
+          (Civil Engineering) at Dedan Kimathi University of Technology, he
+          merges artistic expression with engineering precision. His mission is
+          to inspire others through words that build — just like the structures
+          he studies.
+        </p>
+      </div>
+    ),
+    contact: (
+      <div className="max-w-md mx-auto space-y-4 text-center">
+        <h2 className="text-3xl font-semibold">Contact Kenedy</h2>
+        <p className="text-gray-600">Leave your thoughts or reach out below:</p>
+        <form className="space-y-3">
+          <input
+            type="text"
+            placeholder="Your Name"
+            className="w-full p-2 border rounded-md"
+          />
+          <input
+            type="email"
+            placeholder="Your Email"
+            className="w-full p-2 border rounded-md"
+          />
+          <textarea
+            placeholder="Your Message or Comment"
+            className="w-full p-2 border rounded-md"
+            rows="4"
+          ></textarea>
+          <button className="w-full bg-gray-800 text-white p-2 rounded-md">
+            Send Message
+          </button>
+        </form>
+      </div>
+    ),
+  };
+
+  return (
+    <div className="min-h-screen bg-gradient-to-b from-amber-50 to-white text-gray-800 p-4">
+      <nav className="flex justify-center space-x-4 mb-8">
+        {Object.keys(pages).map((page) => (
+          <button
+            key={page}
+            className={`px-3 py-2 rounded-md ${
+              activePage === page
+                ? 'bg-gray-800 text-white'
+                : 'bg-transparent text-gray-700 hover:text-black'
+            }`}
+            onClick={() => setActivePage(page)}
+          >
+            {page.charAt(0).toUpperCase() + page.slice(1)}
+          </button>
+        ))}
+      </nav>
+
+      <motion.div
+        key={activePage}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.5 }}
+        className="container mx-auto"
+      >
+        {pages[activePage]}
+      </motion.div>
+
+      <footer className="text-center text-gray-500 mt-12 text-sm">
+        © {new Date().getFullYear()} Kenedy’s Ink. All rights reserved.
+      </footer>
+    </div>
+  );
+}
